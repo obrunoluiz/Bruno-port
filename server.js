@@ -37,6 +37,16 @@ http
         return;
       }
 
+      if (filePath === path.resolve(root, "index.html")) {
+        content = Buffer.from(
+          content
+            .toString("utf8")
+            .replace("</head>", '<link rel="stylesheet" href="/portfolio-copy.css"></head>')
+            .replace("</body>", '<script src="/portfolio-copy.js"></script></body>'),
+          "utf8",
+        );
+      }
+
       response.writeHead(200, {
         "Content-Type": mimeTypes[path.extname(filePath).toLowerCase()] || "application/octet-stream",
         "Cache-Control": "no-cache",
