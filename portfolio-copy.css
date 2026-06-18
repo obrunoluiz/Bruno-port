@@ -2,6 +2,26 @@
     display: none;
   }
 
+[data-id="30ca4738"] .portfolio-specialty {
+  min-height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #777;
+  border-radius: 4px;
+  color: #aaa;
+  font: 400 14px/1.1 Arial, sans-serif;
+  text-align: center;
+  padding: 8px 12px;
+}
+
+[data-id="30ca4738"] .portfolio-specialty img {
+  display: none !important;
+}
+
+[data-id="30ca4738"] .portfolio-specialty::after {
+  content: attr(data-specialty);
+}
+
 @media (max-width: 767px) {
   .copy-mobile-break {
     display: initial;
