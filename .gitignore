@@ -3,3 +3,5 @@ node_modules/
 Thumbs.db
 reference-*.png
 local-*.png
+.server.log
+.server-error.log
