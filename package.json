@@ -1,0 +1,9 @@
+{
+  "name": "bruno-port",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Reprodução local da landing page No Code Pages.",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
