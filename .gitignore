@@ -5,3 +5,4 @@ reference-*.png
 local-*.png
 .server.log
 .server-error.log
+dist/

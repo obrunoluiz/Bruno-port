@@ -4,6 +4,7 @@
   "private": true,
   "description": "Reprodução local da landing page No Code Pages.",
   "scripts": {
+    "build": "node build.js",
     "start": "node server.js"
   }
 }
