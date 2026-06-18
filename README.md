@@ -9,7 +9,8 @@ https://designagora.onlineaprender.com/webdesign/
 npm start
 ```
 
-A página ficará disponível em `http://localhost:4173`.
+A página ficará disponível em `http://localhost:4173`. O comando gera e
+serve exatamente a mesma versão estática usada pela Vercel.
 
 > A reprodução preserva os recursos visuais hospedados pela página de referência
 > para manter máxima fidelidade ao original.
