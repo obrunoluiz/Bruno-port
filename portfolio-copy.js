@@ -164,7 +164,7 @@
   carouselSection.id = "carrosseis";
   carouselSection.innerHTML = `
     <div class="portfolio-carousel-heading">
-      <h2>CARROSSÉIS</h2>
+      <h2>CARROSSÉIS DE SUCESSO</h2>
     </div>
     <div class="portfolio-carousel-shell">
       <button class="portfolio-carousel-arrow portfolio-carousel-prev" type="button" aria-label="Slide anterior">‹</button>
@@ -223,7 +223,7 @@
   };
   const restartAutoplay = () => {
     clearInterval(autoplay);
-    autoplay = setInterval(() => moveCarousel(1), 5000);
+    autoplay = setInterval(() => moveCarousel(1), 4000);
   };
 
   carouselSection.querySelector(".portfolio-carousel-prev").addEventListener("click", () => {
