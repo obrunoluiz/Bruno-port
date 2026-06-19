@@ -89,7 +89,7 @@
   setWidget("2b43020f", '<h2 class="elementor-heading-title elementor-size-default">UMA AMOSTRA DO MEU TRABALHO</h2>');
   setWidget("2f0b990", '<h2 class="elementor-heading-title elementor-size-default">ESTRATÉGIA PARA <span class="gradienteidvv2">CADA DESAFIO</span></h2>');
   setWidget("1ba0e33e", '<h2 class="elementor-heading-title elementor-size-default">PROJETOS EM <span class="gradienteidvv2">DESTAQUE</span></h2>');
-  setWidget("ed1d824", '<h2 class="elementor-heading-title elementor-size-default">UMA SELEÇÃO DE TRABALHOS PARA <span class="gradienteidvv2">DIFERENTES OBJETIVOS E SEGMENTOS</span></h2>');
+  setWidget("ed1d824", '<h2 class="elementor-heading-title elementor-size-default">UMA SELEÇÃO DE SITES COM <span class="gradienteidvv2">DIFERENTES OBJETIVOS E SEGMENTOS</span></h2>');
   setWidget("b61b0ab", '<h2 class="elementor-heading-title elementor-size-default">DESIGN COM <span class="gradienteidvv2">VISÃO DE NEGÓCIO</span></h2>');
 
   const heroLogo = document.querySelector('[data-id="d53e663"] img');
