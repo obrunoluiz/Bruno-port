@@ -22,6 +22,14 @@ iframe {
   background-size: cover !important;
 }
 
+[data-id="5fe03de9"] .gradienteidv {
+  background: linear-gradient(90deg, #ff7900 0%, #ffb000 100%) !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  color: #ff7900 !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
 [data-id="46a54668"] {
   visibility: hidden !important;
 }
