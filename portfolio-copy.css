@@ -32,6 +32,14 @@ iframe {
   object-fit: contain;
 }
 
+.offer-card-logo {
+  display: block;
+  width: min(100%, 260px);
+  height: auto;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
 [data-id="30ca4738"] .portfolio-specialty {
   min-height: 36px;
   display: grid;

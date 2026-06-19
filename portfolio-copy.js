@@ -158,6 +158,12 @@
     }
   });
 
+  setWidget("07439a3", '<img class="offer-card-logo" src="/offer-logo-bruno.png" alt="Bruno Luiz">');
+  setWidget("849abe5", '<h2 class="elementor-heading-title elementor-size-default">Photoshop e Illustrator</h2>');
+  document.querySelector('[data-id="18e95cf"]')?.remove();
+  const offerButton = document.querySelector('[data-id="9f76fb7"] .elementor-button-text');
+  if (offerButton) offerButton.textContent = "Fazer Orçamento";
+
   const specialties = [
     "Landing Pages",
     "Web Design",

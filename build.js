@@ -26,6 +26,7 @@ for (const asset of [
   "portfolio-copy.js",
   "hero-bruno.png",
   "logo-de-cria.png",
+  "offer-logo-bruno.png",
   "no-code-pages-saturn.png",
   "card1.png",
   "card2.png",
