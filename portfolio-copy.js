@@ -134,6 +134,8 @@
     aboutImage.alt = "Bruno Luiz e projetos de design";
   }
 
+  document.querySelector('[data-id="4f9480c"]')?.remove();
+
   const workAccordionItems = [
     ["Descoberta e Diagnóstico", "Entendimento dos objetivos do negócio, público, concorrência e oportunidades para construir uma solução alinhada às metas da marca."],
     ["Estratégia e Estrutura", "Planejamento da arquitetura da página, organização das informações e definição da jornada do usuário."],
