@@ -108,6 +108,34 @@
   replaceText(text);
   replaceText(paragraphs);
 
+  const workAccordionItems = [
+    ["Descoberta e Diagnóstico", "Entendimento dos objetivos do negócio, público, concorrência e oportunidades para construir uma solução alinhada às metas da marca."],
+    ["Estratégia e Estrutura", "Planejamento da arquitetura da página, organização das informações e definição da jornada do usuário."],
+    ["Wireframe e Planejamento Visual", "Estruturação da página antes do design final, garantindo clareza, hierarquia e foco nos objetivos do projeto."],
+    ["Design no Photoshop", "Criação visual profissional utilizando Photoshop para desenvolver interfaces modernas, alinhadas ao posicionamento da marca."],
+    ["Experiência e Conversão", "Aplicação de princípios de UX, marketing e design de conversão para melhorar a experiência do usuário e aumentar resultados."],
+    ["Desenvolvimento com VS Code + Codex", "Transformação do layout em uma página funcional utilizando VS Code e Codex, permitindo maior flexibilidade, performance e personalização."],
+    ["Responsividade", "Adaptação completa para desktop, tablet e smartphone, garantindo uma experiência consistente em qualquer dispositivo."],
+    ["Integrações e Funcionalidades", "Configuração de formulários, WhatsApp, ferramentas de marketing, automações e demais recursos necessários."],
+    ["Performance e Otimização", "Melhorias de carregamento, estrutura técnica e boas práticas para garantir velocidade e eficiência."],
+    ["GitHub e Versionamento", "Organização profissional do projeto utilizando GitHub para controle de versões e gerenciamento do desenvolvimento."],
+    ["Deploy e Publicação", "Publicação do projeto utilizando Vercel, configuração de domínio e apontamentos DNS."],
+    ["Inteligência Artificial Aplicada", "Utilização estratégica de IA para acelerar processos criativos, desenvolvimento, pesquisa e validação de soluções."],
+    ["Suporte e Evolução", "Acompanhamento pós-entrega para ajustes, melhorias e futuras evoluções do projeto."],
+    ["Mercado e Estratégia Digital", "Experiência aplicada ao marketing digital para desenvolver páginas alinhadas aos objetivos de negócio e geração de oportunidades."]
+  ];
+  const workAccordion = document.querySelector('[data-id="b4b53d3"]');
+  if (workAccordion) {
+    const workTitles = workAccordion.querySelectorAll(".e-n-accordion-item-title-text");
+    const workContents = workAccordion.querySelectorAll('.e-n-accordion-item > div[role="region"]');
+
+    workAccordionItems.forEach(([title, description], index) => {
+      if (workTitles[index]) workTitles[index].textContent = title;
+      const content = workContents[index]?.querySelector(".elementor-widget-container");
+      if (content) content.innerHTML = `<p>${description}</p>`;
+    });
+  }
+
   document.querySelectorAll(".elementor-button-text").forEach((button) => {
     const label = clean(button.textContent).toLowerCase();
     if (label.includes("quero me inscrever") || label.includes("garantir minha vaga")) {
