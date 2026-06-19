@@ -131,24 +131,128 @@
   });
 
   const sampleCards = [
-    ["36e356e7", "/card1.png", "Landing Pages"],
-    ["1edba248", "/card2.png", "Identidade Visual"],
-    ["3686c29a", "/card3.png", "Campanhas"],
-    ["2fe12819", "/card4.png", "Design para Marketing"],
-    ["4d121917", "/card5.png", "Web Design e Inteligência Artificial"]
+    ["/card1.png", "Landing Pages"],
+    ["/card2.png", "Identidade Visual"],
+    ["/card3.png", "Campanhas"],
+    ["/card4.png", "Design para Marketing"],
+    ["/card5.png", "Web Design e Inteligência Artificial"]
   ];
-  sampleCards.forEach(([widgetId, src, alt]) => {
-    const image = document.querySelector(`[data-id="${widgetId}"] img`);
-    if (!image) return;
 
-    image.src = src;
-    image.dataset.src = src;
-    image.removeAttribute("srcset");
-    image.removeAttribute("data-srcset");
-    image.removeAttribute("sizes");
-    image.removeAttribute("data-sizes");
-    image.alt = alt;
-  });
+  const sampleSection = document.querySelector('[data-id="75359057"]');
+  const sampleSectionInner = sampleSection?.querySelector(":scope > .e-con-inner");
+  if (sampleSection && sampleSectionInner) {
+    sampleSection.classList.add("sample-carousel-section");
+    sampleSectionInner.innerHTML = `
+      <div class="sample-carousel-viewport">
+        <div class="sample-carousel-track">
+          ${sampleCards.map(([src, alt], index) => `
+            <figure class="sample-carousel-card">
+              <img src="${src}" alt="${alt}" loading="${index < 4 ? "eager" : "lazy"}" decoding="async">
+            </figure>
+          `).join("")}
+        </div>
+      </div>
+      <div class="sample-carousel-dots" aria-label="Navegação dos trabalhos">
+        ${sampleCards.map(([, alt], index) => `
+          <button type="button" aria-label="Ver ${alt}" data-sample-dot="${index}"></button>
+        `).join("")}
+      </div>
+    `;
+
+    const sampleViewport = sampleSection.querySelector(".sample-carousel-viewport");
+    const sampleTrack = sampleSection.querySelector(".sample-carousel-track");
+    const sampleDots = [...sampleSection.querySelectorAll("[data-sample-dot]")];
+    const originalSampleSlides = [...sampleTrack.children];
+    let sampleActive = 0;
+    let sampleCloneCount = 0;
+    let sampleOffset = 0;
+    let sampleAutoplay;
+    let sampleTouchStart = 0;
+    let sampleTransitioning = false;
+
+    const sampleVisibleCards = () => window.matchMedia("(max-width: 767px)").matches ? 1 : 4;
+    const sampleSlideWidth = () => sampleViewport.clientWidth / sampleVisibleCards();
+    const updateSampleDots = () => {
+      sampleDots.forEach((dot, index) => {
+        dot.classList.toggle("is-active", index === sampleActive);
+      });
+    };
+    const positionSampleTrack = (animate = true) => {
+      sampleTrack.style.transition = animate ? "transform 650ms cubic-bezier(.22,.61,.36,1)" : "none";
+      sampleTrack.style.transform = `translate3d(${-sampleOffset}px, 0, 0)`;
+      updateSampleDots();
+    };
+    const setupSampleLoop = () => {
+      sampleTrack.querySelectorAll("[data-sample-clone]").forEach((slide) => slide.remove());
+      sampleCloneCount = Math.min(sampleVisibleCards(), originalSampleSlides.length);
+      const width = sampleSlideWidth();
+
+      const before = originalSampleSlides.slice(-sampleCloneCount).map((slide) => {
+        const clone = slide.cloneNode(true);
+        clone.dataset.sampleClone = "true";
+        return clone;
+      });
+      const after = originalSampleSlides.slice(0, sampleCloneCount).map((slide) => {
+        const clone = slide.cloneNode(true);
+        clone.dataset.sampleClone = "true";
+        return clone;
+      });
+
+      before.reverse().forEach((clone) => sampleTrack.prepend(clone));
+      after.forEach((clone) => sampleTrack.append(clone));
+      [...sampleTrack.children].forEach((slide) => {
+        slide.style.flexBasis = `${width}px`;
+        slide.style.width = `${width}px`;
+      });
+
+      sampleOffset = (sampleCloneCount + sampleActive) * width;
+      positionSampleTrack(false);
+    };
+    const moveSample = (direction) => {
+      if (sampleTransitioning) return;
+      sampleTransitioning = true;
+      sampleActive = (sampleActive + direction + sampleCards.length) % sampleCards.length;
+      sampleOffset += direction * sampleSlideWidth();
+      positionSampleTrack(true);
+    };
+    const restartSampleAutoplay = () => {
+      clearInterval(sampleAutoplay);
+      sampleAutoplay = setInterval(() => moveSample(1), 4200);
+    };
+
+    sampleTrack.addEventListener("transitionend", () => {
+      const width = sampleSlideWidth();
+      const firstOriginal = sampleCloneCount * width;
+      const lastOriginal = (sampleCloneCount + sampleCards.length - 1) * width;
+      if (sampleOffset > lastOriginal) sampleOffset -= sampleCards.length * width;
+      if (sampleOffset < firstOriginal) sampleOffset += sampleCards.length * width;
+      positionSampleTrack(false);
+      sampleTransitioning = false;
+    });
+    sampleDots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        sampleActive = index;
+        sampleOffset = (sampleCloneCount + sampleActive) * sampleSlideWidth();
+        positionSampleTrack(true);
+        restartSampleAutoplay();
+      });
+    });
+    sampleViewport.addEventListener("touchstart", (event) => {
+      sampleTouchStart = event.touches[0].clientX;
+      clearInterval(sampleAutoplay);
+    }, { passive: true });
+    sampleViewport.addEventListener("touchend", (event) => {
+      const delta = sampleTouchStart - event.changedTouches[0].clientX;
+      if (Math.abs(delta) > 40) moveSample(delta > 0 ? 1 : -1);
+      restartSampleAutoplay();
+    }, { passive: true });
+    sampleSection.addEventListener("mouseenter", () => clearInterval(sampleAutoplay));
+    sampleSection.addEventListener("mouseleave", restartSampleAutoplay);
+    window.addEventListener("resize", setupSampleLoop);
+
+    setupSampleLoop();
+    restartSampleAutoplay();
+  }
 
   const portfolioImages = [
     ["/project-nickson.png", "Projeto Nickson Resende"],
