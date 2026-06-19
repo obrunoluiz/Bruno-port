@@ -135,6 +135,7 @@
   }
 
   document.querySelector('[data-id="4f9480c"]')?.remove();
+  document.querySelector('[data-id="46029a7"]')?.remove();
 
   const workAccordionItems = [
     ["Descoberta e Diagnóstico", "Entendimento dos objetivos do negócio, público, concorrência e oportunidades para construir uma solução alinhada às metas da marca."],
