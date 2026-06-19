@@ -155,6 +155,103 @@
     }
   }
 
+  const carouselAssets = [
+    ...Array.from({ length: 9 }, (_, index) => `/carousel-${String(index + 1).padStart(2, "0")}.gif`),
+    ...Array.from({ length: 9 }, (_, index) => `/carousel-${String(index + 10).padStart(2, "0")}.png`)
+  ];
+  const carouselSection = document.createElement("section");
+  carouselSection.className = "portfolio-carousel-section";
+  carouselSection.id = "carrosseis";
+  carouselSection.innerHTML = `
+    <div class="portfolio-carousel-heading">
+      <h2>CARROSSÉIS</h2>
+    </div>
+    <div class="portfolio-carousel-shell">
+      <button class="portfolio-carousel-arrow portfolio-carousel-prev" type="button" aria-label="Slide anterior">‹</button>
+      <div class="portfolio-carousel-viewport">
+        <div class="portfolio-carousel-track">
+          ${carouselAssets.map((src, index) => `
+            <figure class="portfolio-carousel-slide">
+              <img src="${src}" alt="Projeto de carrossel ${index + 1}" loading="lazy" decoding="async">
+            </figure>
+          `).join("")}
+        </div>
+      </div>
+      <button class="portfolio-carousel-arrow portfolio-carousel-next" type="button" aria-label="Próximo slide">›</button>
+    </div>
+    <div class="portfolio-carousel-dots" aria-label="Navegação do carrossel"></div>
+  `;
+
+  const portfolioSection = portfolioCarousel?.closest(".e-con.e-parent");
+  if (portfolioSection) portfolioSection.insertAdjacentElement("afterend", carouselSection);
+
+  const track = carouselSection.querySelector(".portfolio-carousel-track");
+  const viewport = carouselSection.querySelector(".portfolio-carousel-viewport");
+  const dots = carouselSection.querySelector(".portfolio-carousel-dots");
+  let activeSlide = 0;
+  let autoplay;
+
+  const visibleSlides = () => window.matchMedia("(max-width: 767px)").matches ? 1 : 4;
+  const maxSlide = () => Math.max(0, carouselAssets.length - visibleSlides());
+  const renderCarousel = () => {
+    activeSlide = Math.min(activeSlide, maxSlide());
+    track.style.transform = `translateX(calc(${activeSlide} * (-100% / ${visibleSlides()})))`;
+    dots.querySelectorAll("button").forEach((dot, index) => {
+      dot.classList.toggle("is-active", index === activeSlide);
+    });
+  };
+  const buildDots = () => {
+    dots.innerHTML = "";
+    for (let index = 0; index <= maxSlide(); index += 1) {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.ariaLabel = `Ir para o slide ${index + 1}`;
+      dot.addEventListener("click", () => {
+        activeSlide = index;
+        renderCarousel();
+        restartAutoplay();
+      });
+      dots.appendChild(dot);
+    }
+    renderCarousel();
+  };
+  const moveCarousel = (direction) => {
+    activeSlide = direction > 0
+      ? (activeSlide >= maxSlide() ? 0 : activeSlide + 1)
+      : (activeSlide <= 0 ? maxSlide() : activeSlide - 1);
+    renderCarousel();
+  };
+  const restartAutoplay = () => {
+    clearInterval(autoplay);
+    autoplay = setInterval(() => moveCarousel(1), 5000);
+  };
+
+  carouselSection.querySelector(".portfolio-carousel-prev").addEventListener("click", () => {
+    moveCarousel(-1);
+    restartAutoplay();
+  });
+  carouselSection.querySelector(".portfolio-carousel-next").addEventListener("click", () => {
+    moveCarousel(1);
+    restartAutoplay();
+  });
+  carouselSection.addEventListener("mouseenter", () => clearInterval(autoplay));
+  carouselSection.addEventListener("mouseleave", restartAutoplay);
+
+  let touchStart = 0;
+  viewport.addEventListener("touchstart", (event) => {
+    touchStart = event.touches[0].clientX;
+    clearInterval(autoplay);
+  }, { passive: true });
+  viewport.addEventListener("touchend", (event) => {
+    const delta = touchStart - event.changedTouches[0].clientX;
+    if (Math.abs(delta) > 40) moveCarousel(delta > 0 ? 1 : -1);
+    restartAutoplay();
+  }, { passive: true });
+
+  window.addEventListener("resize", buildDots);
+  buildDots();
+  restartAutoplay();
+
   const about = document.querySelector('[data-id="13a5f852"] .elementor-widget-container');
   if (about) {
     about.innerHTML = "<p>Acredito que design não é apenas aparência.</p><p>Meu trabalho consiste em entender objetivos, identificar oportunidades e criar soluções digitais que contribuam para o crescimento de negócios e marcas.</p><p>Cada projeto é desenvolvido considerando posicionamento, experiência do usuário, comunicação e resultados.</p>";

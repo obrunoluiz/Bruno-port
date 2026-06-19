@@ -22,7 +22,9 @@ for (const asset of [
   "project-mariana-links.png",
   "project-ia-de-verdade.png",
   "project-wing.png",
-  "project-x32.png"
+  "project-x32.png",
+  ...Array.from({ length: 9 }, (_, index) => `carousel-${String(index + 1).padStart(2, "0")}.gif`),
+  ...Array.from({ length: 9 }, (_, index) => `carousel-${String(index + 10).padStart(2, "0")}.png`)
 ]) {
   fs.copyFileSync(path.join(root, asset), path.join(output, asset));
 }
