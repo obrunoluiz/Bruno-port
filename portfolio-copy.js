@@ -420,10 +420,9 @@
 
   const faq = [
     ["Você desenvolve o site completo?", "Sim. Desde o planejamento visual até a publicação final."],
-    ["Você trabalha apenas com design?", "Não. Também atuo na implementação e estruturação técnica dos projetos."],
+    ["Você trabalha apenas com design?", "Trabalho a 8 anos como Designer mas também sou WebDesigner com IA."],
     ["Quanto tempo leva um projeto?", "Depende da complexidade, mas cada projeto recebe um cronograma personalizado."],
-    ["Você trabalha com landing pages?", "Sim. Landing pages são uma das minhas principais especialidades."],
-    ["Faz manutenção?", "Sim, dependendo da necessidade do projeto."]
+    ["Você trabalha com landing pages?", "Sim. Landing pages são uma das minhas principais especialidades."]
   ];
   const faqRoot = document.querySelector('[data-id="eda9f8e"]')?.parentElement || document;
   const titles = faqRoot.querySelectorAll(".elementor-tab-title, .e-n-accordion-item-title-text");
@@ -431,6 +430,9 @@
   faq.forEach(([question, answer], index) => {
     if (titles[index]) titles[index].textContent = question;
     if (contents[index]) contents[index].innerHTML = `<p>${answer}</p>`;
+  });
+  Array.from(titles).slice(faq.length).forEach((title) => {
+    title.closest(".e-n-accordion-item, .elementor-accordion-item")?.remove();
   });
 
   document.title = "Bruno Luiz | Designer Estratégico e Web Designer";
