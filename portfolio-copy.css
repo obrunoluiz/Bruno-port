@@ -52,76 +52,6 @@ iframe {
   content: attr(data-specialty);
 }
 
-.sample-carousel-section {
-  width: 100%;
-  overflow: hidden;
-}
-
-.sample-carousel-section > .e-con-inner {
-  display: block !important;
-  width: 100% !important;
-  max-width: none !important;
-}
-
-.sample-carousel-viewport {
-  width: 100%;
-  overflow: hidden;
-  touch-action: pan-y;
-}
-
-.sample-carousel-track {
-  display: flex;
-  align-items: stretch;
-  gap: 0;
-  will-change: transform;
-}
-
-.sample-carousel-card {
-  flex: 0 0 25%;
-  width: 25%;
-  aspect-ratio: 1000 / 1430;
-  margin: 0;
-  padding: 0 10px;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-
-.sample-carousel-card img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  border-radius: 9px;
-  background: #080808;
-  box-sizing: border-box;
-}
-
-.sample-carousel-dots {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 14px;
-}
-
-.sample-carousel-dots button {
-  width: 8px;
-  height: 8px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: #d7d7d7;
-  cursor: pointer;
-  opacity: 0.9;
-  transition: background 180ms ease, box-shadow 180ms ease;
-}
-
-.sample-carousel-dots button.is-active {
-  background: #7f00ff;
-  box-shadow: 0 0 10px rgba(127, 0, 255, 0.8);
-}
-
 [data-id="f8fa23f"] .swiper-slide-inner {
   display: block;
   aspect-ratio: 1000 / 1430;
@@ -418,36 +348,6 @@ iframe {
     min-height: 44px;
     padding: 8px 10px;
     font-size: 12px;
-  }
-
-  .sample-carousel-section > .e-con-inner {
-    padding-inline: 0 !important;
-  }
-
-  [data-id="2b43020f"] {
-    width: 100% !important;
-    padding-inline: 16px;
-    box-sizing: border-box;
-  }
-
-  [data-id="2b43020f"] .elementor-heading-title {
-    font-size: clamp(27px, 8vw, 34px) !important;
-    line-height: 1.04 !important;
-    text-align: center;
-  }
-
-  .sample-carousel-track {
-    gap: 0;
-  }
-
-  .sample-carousel-card {
-    width: 100%;
-    flex-basis: 100%;
-    padding: 0 14px;
-  }
-
-  .sample-carousel-card img {
-    border-radius: 9px;
   }
 
   [data-id="f8fa23f"] {
