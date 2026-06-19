@@ -460,3 +460,8 @@ iframe {
     font-size: 26px !important;
   }
 }
+
+[data-id="c9596fe"] .e-n-accordion-item > div[role="region"],
+[data-id="c9596fe"] .e-n-accordion-item > div[role="region"] p {
+  color: #fff !important;
+}
