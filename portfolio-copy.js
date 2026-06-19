@@ -89,7 +89,7 @@
   setWidget("2b43020f", '<h2 class="elementor-heading-title elementor-size-default">UMA AMOSTRA DO MEU TRABALHO</h2>');
   setWidget("2f0b990", '<h2 class="elementor-heading-title elementor-size-default">ESTRATÉGIA PARA <span class="gradienteidvv2">CADA DESAFIO</span></h2>');
   setWidget("1ba0e33e", '<h2 class="elementor-heading-title elementor-size-default">PROJETOS EM <span class="gradienteidvv2">DESTAQUE</span></h2>');
-  setWidget("ed1d824", '<h2 class="elementor-heading-title elementor-size-default">SITES DE <span class="gradienteidvv2">SUCESSO</span></h2>');
+  setWidget("ed1d824", '<h2 class="elementor-heading-title elementor-size-default">UMA SELEÇÃO DE TRABALHOS PARA <span class="gradienteidvv2">DIFERENTES OBJETIVOS E SEGMENTOS</span></h2>');
   setWidget("b61b0ab", '<h2 class="elementor-heading-title elementor-size-default">DESIGN COM <span class="gradienteidvv2">VISÃO DE NEGÓCIO</span></h2>');
 
   const heroLogo = document.querySelector('[data-id="d53e663"] img');
@@ -107,75 +107,6 @@
 
   replaceText(text);
   replaceText(paragraphs);
-
-  const processSection = document.querySelector('[data-id="b4b53d3"]');
-  const processSectionInner = processSection?.querySelector(":scope > .e-con-inner");
-  if (processSection && processSectionInner) {
-    const processSteps = [
-      ["Descoberta e Diagnóstico", "Entendimento dos objetivos do negócio, público-alvo, concorrentes e oportunidades para criar uma solução alinhada às metas da marca."],
-      ["Estratégia e Estrutura", "Definição da arquitetura da página, hierarquia das informações e jornada do usuário para maximizar clareza e conversão."],
-      ["Design Visual", "Criação de interfaces modernas, funcionais e alinhadas ao posicionamento da empresa."],
-      ["Experiência do Usuário", "Organização dos elementos para facilitar a navegação e tornar a experiência mais intuitiva."],
-      ["Desenvolvimento", "Implementação utilizando VS Code, Codex, GitHub e tecnologias modernas para garantir performance e escalabilidade."],
-      ["Integrações e Funcionalidades", "Configuração de formulários, automações, ferramentas de marketing e recursos necessários para o projeto."],
-      ["Performance e Otimização", "Ajustes de velocidade, responsividade e boas práticas para melhorar a experiência do usuário."],
-      ["Publicação e Deploy", "Configuração de domínio, hospedagem, DNS e publicação do projeto em ambiente de produção."],
-      ["Inteligência Artificial no Processo", "Utilizo Inteligência Artificial de forma estratégica para acelerar etapas de pesquisa, estruturação, desenvolvimento e refinamento dos projetos."],
-      ["Revisões e Refinamentos", "Análise contínua dos detalhes visuais e funcionais para garantir uma entrega profissional."],
-      ["Suporte Pós-Entrega", "Orientação para utilização do projeto e suporte inicial após a publicação."],
-      ["Evolução Contínua", "Todo projeto pode evoluir. Novas páginas, melhorias e otimizações podem ser implementadas conforme o crescimento do negócio."]
-    ];
-
-    processSection.classList.add("work-process-section");
-    processSectionInner.innerHTML = `
-      <div class="work-process-intro">
-        <p class="work-process-kicker">ESTRATÉGIA, DESIGN E TECNOLOGIA</p>
-        <h2>DESIGN. MARKETING.<br>IMPLEMENTAÇÃO.</h2>
-        <p class="work-process-lead">Transformo ideias em experiências digitais que unem estratégia, design e tecnologia.</p>
-        <ul class="work-process-services">
-          <li>Planejamento Estratégico</li>
-          <li>Design de Conversão</li>
-          <li>Desenvolvimento Web</li>
-          <li>Publicação e Deploy</li>
-          <li>Otimização Contínua</li>
-          <li>Inteligência Artificial Aplicada</li>
-        </ul>
-        <a class="work-process-cta" href="#projetos">VER PROJETOS <span aria-hidden="true">→</span></a>
-      </div>
-      <div class="work-process-content">
-        <header class="work-process-header">
-          <p>COMO CADA PROJETO É CONSTRUÍDO</p>
-          <h2>PROCESSO DE <span class="gradienteidvv2">TRABALHO</span></h2>
-        </header>
-        <div class="work-process-grid">
-          ${processSteps.map(([title, description], index) => `
-            <article class="work-process-step ${index === 8 ? "work-process-step-featured" : ""}">
-              <span class="work-process-number">${String(index + 1).padStart(2, "0")}</span>
-              <div>
-                <h3>${title}</h3>
-                <p>${description}</p>
-                ${index === 8 ? `
-                  <div class="work-process-ai">
-                    <p>Meu fluxo combina <strong>VS Code + Codex</strong>, permitindo desenvolver sites e landing pages com mais velocidade, precisão e flexibilidade do que construtores tradicionais.</p>
-                    <p>Essa abordagem reduz o tempo de execução, melhora a qualidade da entrega e possibilita soluções personalizadas, escaláveis e alinhadas a cada negócio.</p>
-                    <h4>Tecnologias utilizadas</h4>
-                    <ul>
-                      <li>VS Code</li>
-                      <li>Codex</li>
-                      <li>GitHub</li>
-                      <li>Vercel</li>
-                      <li>Ferramentas de IA aplicadas ao design e desenvolvimento</li>
-                    </ul>
-                    <p>O objetivo não é substituir a estratégia ou a criatividade, mas potencializar a execução para entregar projetos melhores em menos tempo.</p>
-                  </div>
-                ` : ""}
-              </div>
-            </article>
-          `).join("")}
-        </div>
-      </div>
-    `;
-  }
 
   document.querySelectorAll(".elementor-button-text").forEach((button) => {
     const label = clean(button.textContent).toLowerCase();
