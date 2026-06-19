@@ -13,6 +13,12 @@
   visibility: hidden !important;
 }
 
+[data-id="d53e663"] img {
+  width: 220px !important;
+  height: auto !important;
+  object-fit: contain;
+}
+
 [data-id="30ca4738"] .portfolio-specialty {
   min-height: 36px;
   display: grid;
@@ -55,6 +61,10 @@
 
   .copy-mobile-break {
     display: initial;
+  }
+
+  [data-id="d53e663"] img {
+    width: 190px !important;
   }
 
   [data-id="5fe03de9"] {

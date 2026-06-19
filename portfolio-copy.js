@@ -92,6 +92,19 @@
   setWidget("ed1d824", '<h2 class="elementor-heading-title elementor-size-default">UMA SELEÇÃO DE TRABALHOS PARA <span class="gradienteidvv2">DIFERENTES OBJETIVOS E SEGMENTOS</span></h2>');
   setWidget("b61b0ab", '<h2 class="elementor-heading-title elementor-size-default">DESIGN COM <span class="gradienteidvv2">VISÃO DE NEGÓCIO</span></h2>');
 
+  const heroLogo = document.querySelector('[data-id="d53e663"] img');
+  if (heroLogo) {
+    heroLogo.src = "/logo-de-cria.png";
+    heroLogo.dataset.src = "/logo-de-cria.png";
+    heroLogo.removeAttribute("srcset");
+    heroLogo.removeAttribute("data-srcset");
+    heroLogo.removeAttribute("sizes");
+    heroLogo.removeAttribute("data-sizes");
+    heroLogo.alt = "Logo De Cria";
+    heroLogo.width = 220;
+    heroLogo.height = 105;
+  }
+
   replaceText(text);
   replaceText(paragraphs);
 
