@@ -8,6 +8,14 @@ fs.mkdirSync(output, { recursive: true });
 
 const sourceHtml = fs.readFileSync(path.join(root, "index.html"), "utf8");
 const deployHtml = sourceHtml
+  .replace(
+    '<link rel="canonical" href="https://designagora.onlineaprender.com/webdesign/" />',
+    '<link rel="canonical" href="https://bruno-port.vercel.app/" />'
+  )
+  .replace(
+    '<meta property="og:url" content="https://designagora.onlineaprender.com/webdesign/" />',
+    '<meta property="og:url" content="https://bruno-port.vercel.app/" />'
+  )
   .replace("</head>", '<link rel="stylesheet" href="/portfolio-copy.css"></head>')
   .replace("</body>", '<script src="/portfolio-copy.js"></script></body>');
 
