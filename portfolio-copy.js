@@ -108,6 +108,21 @@
   replaceText(text);
   replaceText(paragraphs);
 
+  ["7721c95", "43d225a", "48b0044", "2dc9f3a"].forEach((id) => {
+    document.querySelector(`[data-id="${id}"]`)?.remove();
+  });
+
+  const saturnImage = document.querySelector('[data-id="eb4d5eb"] img');
+  if (saturnImage) {
+    saturnImage.src = "/no-code-pages-saturn.png";
+    saturnImage.dataset.src = "/no-code-pages-saturn.png";
+    saturnImage.removeAttribute("srcset");
+    saturnImage.removeAttribute("data-srcset");
+    saturnImage.removeAttribute("sizes");
+    saturnImage.removeAttribute("data-sizes");
+    saturnImage.alt = "Bruno Luiz";
+  }
+
   const workAccordionItems = [
     ["Descoberta e Diagnóstico", "Entendimento dos objetivos do negócio, público, concorrência e oportunidades para construir uma solução alinhada às metas da marca."],
     ["Estratégia e Estrutura", "Planejamento da arquitetura da página, organização das informações e definição da jornada do usuário."],
