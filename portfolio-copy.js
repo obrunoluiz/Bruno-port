@@ -134,6 +134,11 @@
     verticalLogo.alt = "Bruno Luiz";
   }
 
+  const footerLogo = document.querySelector('[data-id="7cce0aa2"] .elementor-icon');
+  if (footerLogo) {
+    footerLogo.innerHTML = '<img class="footer-logo-bruno" src="/logo-de-cria.png" alt="Bruno Luiz">';
+  }
+
   const aboutImage = document.querySelector('[data-id="5a4069ca"] img');
   if (aboutImage) {
     aboutImage.src = "/bruno-expert.png";

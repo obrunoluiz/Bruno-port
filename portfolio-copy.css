@@ -40,6 +40,13 @@ iframe {
   object-fit: contain;
 }
 
+.footer-logo-bruno {
+  display: block;
+  width: 162px;
+  height: 63px;
+  object-fit: contain;
+}
+
 [data-id="43fd208d"] .elementor-widget-container {
   position: relative;
   min-height: 484px;
