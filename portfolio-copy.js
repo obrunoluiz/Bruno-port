@@ -130,6 +130,26 @@
     slide.classList.add("portfolio-specialty");
   });
 
+  const sampleCards = [
+    ["36e356e7", "/card1.png", "Landing Pages"],
+    ["1edba248", "/card2.png", "Identidade Visual"],
+    ["3686c29a", "/card3.png", "Campanhas"],
+    ["2fe12819", "/card4.png", "Design para Marketing"],
+    ["4d121917", "/card5.png", "Web Design e Inteligência Artificial"]
+  ];
+  sampleCards.forEach(([widgetId, src, alt]) => {
+    const image = document.querySelector(`[data-id="${widgetId}"] img`);
+    if (!image) return;
+
+    image.src = src;
+    image.dataset.src = src;
+    image.removeAttribute("srcset");
+    image.removeAttribute("data-srcset");
+    image.removeAttribute("sizes");
+    image.removeAttribute("data-sizes");
+    image.alt = alt;
+  });
+
   const portfolioImages = [
     ["/project-nickson.png", "Projeto Nickson Resende"],
     ["/project-mariana-links.png", "Projeto Mariana Torres"],
