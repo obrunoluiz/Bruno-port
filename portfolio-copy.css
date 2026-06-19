@@ -66,9 +66,8 @@ iframe {
 }
 
 .portfolio-carousel-section {
-  --carousel-gap: 20px;
   width: 100%;
-  padding: 72px 32px 90px;
+  padding: 72px 0 90px;
   background: #0e0e10;
   color: #fff;
   overflow: hidden;
@@ -90,7 +89,7 @@ iframe {
 
 .portfolio-carousel-shell {
   position: relative;
-  width: min(100%, 1400px);
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -110,7 +109,7 @@ iframe {
   width: 25%;
   aspect-ratio: 1000 / 1430;
   margin: 0;
-  padding: 0 calc(var(--carousel-gap) / 2);
+  padding: 0;
   overflow: hidden;
 }
 
@@ -120,31 +119,11 @@ iframe {
   height: 100%;
   object-fit: cover;
   object-position: top center;
-  border-radius: 7px;
+  border-radius: 0;
 }
 
 .portfolio-carousel-arrow {
-  position: absolute;
-  z-index: 3;
-  top: 50%;
-  width: 46px;
-  height: 46px;
-  border: 1px solid rgba(255, 255, 255, .45);
-  border-radius: 50%;
-  background: rgba(14, 14, 16, .78);
-  color: #fff;
-  font-size: 34px;
-  line-height: 1;
-  cursor: pointer;
-  transform: translateY(-50%);
-}
-
-.portfolio-carousel-prev {
-  left: -12px;
-}
-
-.portfolio-carousel-next {
-  right: -12px;
+  display: none;
 }
 
 .portfolio-carousel-dots {
@@ -382,8 +361,7 @@ iframe {
   }
 
   .portfolio-carousel-section {
-    --carousel-gap: 14px;
-    padding: 56px 14px 66px;
+    padding: 56px 24px 66px;
   }
 
   .portfolio-carousel-heading {
@@ -397,20 +375,6 @@ iframe {
   .portfolio-carousel-slide {
     flex-basis: 100%;
     width: 100%;
-  }
-
-  .portfolio-carousel-arrow {
-    width: 40px;
-    height: 40px;
-    font-size: 29px;
-  }
-
-  .portfolio-carousel-prev {
-    left: 7px;
-  }
-
-  .portfolio-carousel-next {
-    right: 7px;
   }
 
   .portfolio-carousel-dots {

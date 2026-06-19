@@ -223,7 +223,7 @@
   };
   const restartAutoplay = () => {
     clearInterval(autoplay);
-    autoplay = setInterval(() => moveCarousel(1), 4000);
+    autoplay = setInterval(() => moveCarousel(1), 5000);
   };
 
   carouselSection.querySelector(".portfolio-carousel-prev").addEventListener("click", () => {
