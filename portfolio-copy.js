@@ -188,39 +188,98 @@
   const track = carouselSection.querySelector(".portfolio-carousel-track");
   const viewport = carouselSection.querySelector(".portfolio-carousel-viewport");
   const dots = carouselSection.querySelector(".portfolio-carousel-dots");
+  const originalSlides = [...track.children];
   let activeSlide = 0;
+  let trackIndex = 0;
+  let cloneCount = 0;
+  let isAnimating = false;
   let autoplay;
 
   const visibleSlides = () => window.matchMedia("(max-width: 767px)").matches ? 1 : 4;
-  const maxSlide = () => Math.max(0, carouselAssets.length - visibleSlides());
-  const renderCarousel = () => {
-    activeSlide = Math.min(activeSlide, maxSlide());
-    track.style.transform = `translateX(calc(${activeSlide} * (-100% / ${visibleSlides()})))`;
+  const slideWidth = () => viewport.clientWidth / visibleSlides();
+  const updateDots = () => {
     dots.querySelectorAll("button").forEach((dot, index) => {
       dot.classList.toggle("is-active", index === activeSlide);
     });
   };
+
+  const positionTrack = (animate = true) => {
+    track.style.transition = animate ? "" : "none";
+    track.style.transform = `translate3d(${-trackIndex * slideWidth()}px, 0, 0)`;
+    if (!animate) {
+      track.getBoundingClientRect();
+      track.style.transition = "";
+    }
+    updateDots();
+  };
+
+  const setupInfiniteLoop = () => {
+    track.querySelectorAll("[data-carousel-clone]").forEach((slide) => slide.remove());
+    cloneCount = Math.min(visibleSlides(), originalSlides.length);
+
+    originalSlides.forEach((slide) => {
+      slide.style.flexBasis = `${slideWidth()}px`;
+      slide.style.width = `${slideWidth()}px`;
+    });
+
+    const before = originalSlides.slice(-cloneCount).map((slide) => {
+      const clone = slide.cloneNode(true);
+      clone.dataset.carouselClone = "true";
+      return clone;
+    });
+    const after = originalSlides.slice(0, cloneCount).map((slide) => {
+      const clone = slide.cloneNode(true);
+      clone.dataset.carouselClone = "true";
+      return clone;
+    });
+
+    before.reverse().forEach((clone) => track.prepend(clone));
+    after.forEach((clone) => track.append(clone));
+    [...track.children].forEach((slide) => {
+      slide.style.flexBasis = `${slideWidth()}px`;
+      slide.style.width = `${slideWidth()}px`;
+    });
+
+    trackIndex = cloneCount + activeSlide;
+    positionTrack(false);
+  };
+
   const buildDots = () => {
     dots.innerHTML = "";
-    for (let index = 0; index <= maxSlide(); index += 1) {
+    for (let index = 0; index < carouselAssets.length; index += 1) {
       const dot = document.createElement("button");
       dot.type = "button";
       dot.ariaLabel = `Ir para o slide ${index + 1}`;
       dot.addEventListener("click", () => {
         activeSlide = index;
-        renderCarousel();
+        trackIndex = cloneCount + activeSlide;
+        positionTrack();
         restartAutoplay();
       });
       dots.appendChild(dot);
     }
-    renderCarousel();
+    setupInfiniteLoop();
   };
+
   const moveCarousel = (direction) => {
-    activeSlide = direction > 0
-      ? (activeSlide >= maxSlide() ? 0 : activeSlide + 1)
-      : (activeSlide <= 0 ? maxSlide() : activeSlide - 1);
-    renderCarousel();
+    if (isAnimating) return;
+    isAnimating = true;
+    activeSlide = (activeSlide + direction + carouselAssets.length) % carouselAssets.length;
+    trackIndex += direction;
+    positionTrack();
   };
+
+  track.addEventListener("transitionend", () => {
+    if (trackIndex >= cloneCount + carouselAssets.length) {
+      trackIndex = cloneCount;
+      positionTrack(false);
+    } else if (trackIndex < cloneCount) {
+      trackIndex = cloneCount + carouselAssets.length - 1;
+      positionTrack(false);
+    }
+    isAnimating = false;
+  });
+
   const restartAutoplay = () => {
     clearInterval(autoplay);
     autoplay = setInterval(() => moveCarousel(1), 5000);
@@ -245,7 +304,14 @@
     restartAutoplay();
   }, { passive: true });
 
-  window.addEventListener("resize", buildDots);
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      setupInfiniteLoop();
+      restartAutoplay();
+    }, 150);
+  });
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden) restartAutoplay();
   });
