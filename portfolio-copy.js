@@ -108,6 +108,19 @@
   replaceText(text);
   replaceText(paragraphs);
 
+  ["34994949", "62b8d710", "4c87b8c3", "771290f0", "594a4a3b"].forEach((id) => {
+    const icon = document.querySelector(`[data-id="${id}"] img`);
+    if (!icon) return;
+
+    icon.src = "/pen-tool.png";
+    icon.dataset.src = "/pen-tool.png";
+    icon.removeAttribute("srcset");
+    icon.removeAttribute("data-srcset");
+    icon.removeAttribute("sizes");
+    icon.removeAttribute("data-sizes");
+    icon.alt = "";
+  });
+
   ["7721c95", "43d225a", "48b0044", "2dc9f3a"].forEach((id) => {
     document.querySelector(`[data-id="${id}"]`)?.remove();
   });

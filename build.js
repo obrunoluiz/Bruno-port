@@ -30,6 +30,7 @@ for (const asset of [
   "logo-bruno-motion.png",
   "offer-logo-bruno.png",
   "no-code-pages-saturn.png",
+  "pen-tool.png",
   "card1.png",
   "card2.png",
   "card3.png",
