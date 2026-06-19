@@ -123,6 +123,17 @@
     saturnImage.alt = "Bruno Luiz";
   }
 
+  const aboutImage = document.querySelector('[data-id="5a4069ca"] img');
+  if (aboutImage) {
+    aboutImage.src = "/bruno-expert.png";
+    aboutImage.dataset.src = "/bruno-expert.png";
+    aboutImage.removeAttribute("srcset");
+    aboutImage.removeAttribute("data-srcset");
+    aboutImage.removeAttribute("sizes");
+    aboutImage.removeAttribute("data-sizes");
+    aboutImage.alt = "Bruno Luiz e projetos de design";
+  }
+
   const workAccordionItems = [
     ["Descoberta e Diagnóstico", "Entendimento dos objetivos do negócio, público, concorrência e oportunidades para construir uma solução alinhada às metas da marca."],
     ["Estratégia e Estrutura", "Planejamento da arquitetura da página, organização das informações e definição da jornada do usuário."],
