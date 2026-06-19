@@ -190,10 +190,10 @@
   const dots = carouselSection.querySelector(".portfolio-carousel-dots");
   const originalSlides = [...track.children];
   let activeSlide = 0;
-  let trackIndex = 0;
   let cloneCount = 0;
-  let isAnimating = false;
-  let autoplay;
+  let offset = 0;
+  let animationFrame;
+  let previousFrame;
 
   const visibleSlides = () => window.matchMedia("(max-width: 767px)").matches ? 1 : 4;
   const slideWidth = () => viewport.clientWidth / visibleSlides();
@@ -203,13 +203,19 @@
     });
   };
 
-  const positionTrack = (animate = true) => {
-    track.style.transition = animate ? "" : "none";
-    track.style.transform = `translate3d(${-trackIndex * slideWidth()}px, 0, 0)`;
-    if (!animate) {
-      track.getBoundingClientRect();
-      track.style.transition = "";
-    }
+  const normalizeOffset = () => {
+    const width = slideWidth();
+    const loopWidth = carouselAssets.length * width;
+    const loopStart = cloneCount * width;
+    while (offset >= loopStart + loopWidth) offset -= loopWidth;
+    while (offset < loopStart) offset += loopWidth;
+  };
+
+  const positionTrack = () => {
+    normalizeOffset();
+    const relativeIndex = Math.floor((offset - cloneCount * slideWidth()) / slideWidth());
+    activeSlide = (relativeIndex + carouselAssets.length) % carouselAssets.length;
+    track.style.transform = `translate3d(${-offset}px, 0, 0)`;
     updateDots();
   };
 
@@ -240,8 +246,8 @@
       slide.style.width = `${slideWidth()}px`;
     });
 
-    trackIndex = cloneCount + activeSlide;
-    positionTrack(false);
+    offset = (cloneCount + activeSlide) * slideWidth();
+    positionTrack();
   };
 
   const buildDots = () => {
@@ -252,9 +258,8 @@
       dot.ariaLabel = `Ir para o slide ${index + 1}`;
       dot.addEventListener("click", () => {
         activeSlide = index;
-        trackIndex = cloneCount + activeSlide;
+        offset = (cloneCount + activeSlide) * slideWidth();
         positionTrack();
-        restartAutoplay();
       });
       dots.appendChild(dot);
     }
@@ -262,46 +267,33 @@
   };
 
   const moveCarousel = (direction) => {
-    if (isAnimating) return;
-    isAnimating = true;
-    activeSlide = (activeSlide + direction + carouselAssets.length) % carouselAssets.length;
-    trackIndex += direction;
+    offset += direction * slideWidth();
     positionTrack();
   };
 
-  track.addEventListener("transitionend", () => {
-    if (trackIndex >= cloneCount + carouselAssets.length) {
-      trackIndex = cloneCount;
-      positionTrack(false);
-    } else if (trackIndex < cloneCount) {
-      trackIndex = cloneCount + carouselAssets.length - 1;
-      positionTrack(false);
-    }
-    isAnimating = false;
-  });
-
-  const restartAutoplay = () => {
-    clearInterval(autoplay);
-    autoplay = setInterval(() => moveCarousel(1), 5000);
+  const runContinuousScroll = (timestamp) => {
+    if (previousFrame === undefined) previousFrame = timestamp;
+    const elapsed = Math.min(timestamp - previousFrame, 50);
+    previousFrame = timestamp;
+    const pixelsPerSecond = window.matchMedia("(max-width: 767px)").matches ? 26 : 38;
+    offset += pixelsPerSecond * elapsed / 1000;
+    positionTrack();
+    animationFrame = requestAnimationFrame(runContinuousScroll);
   };
 
   carouselSection.querySelector(".portfolio-carousel-prev").addEventListener("click", () => {
     moveCarousel(-1);
-    restartAutoplay();
   });
   carouselSection.querySelector(".portfolio-carousel-next").addEventListener("click", () => {
     moveCarousel(1);
-    restartAutoplay();
   });
   let touchStart = 0;
   viewport.addEventListener("touchstart", (event) => {
     touchStart = event.touches[0].clientX;
-    clearInterval(autoplay);
   }, { passive: true });
   viewport.addEventListener("touchend", (event) => {
     const delta = touchStart - event.changedTouches[0].clientX;
     if (Math.abs(delta) > 40) moveCarousel(delta > 0 ? 1 : -1);
-    restartAutoplay();
   }, { passive: true });
 
   let resizeTimer;
@@ -309,14 +301,14 @@
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
       setupInfiniteLoop();
-      restartAutoplay();
     }, 150);
   });
   document.addEventListener("visibilitychange", () => {
-    if (!document.hidden) restartAutoplay();
+    if (!document.hidden) previousFrame = undefined;
   });
   buildDots();
-  restartAutoplay();
+  cancelAnimationFrame(animationFrame);
+  animationFrame = requestAnimationFrame(runContinuousScroll);
 
   const about = document.querySelector('[data-id="13a5f852"] .elementor-widget-container');
   if (about) {

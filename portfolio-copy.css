@@ -100,7 +100,7 @@ iframe {
 
 .portfolio-carousel-track {
   display: flex;
-  transition: transform 650ms cubic-bezier(.22, .61, .36, 1);
+  transition: none;
   will-change: transform;
 }
 
