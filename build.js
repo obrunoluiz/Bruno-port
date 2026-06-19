@@ -27,6 +27,7 @@ for (const asset of [
   "hero-bruno.png",
   "bruno-expert.png",
   "logo-de-cria.png",
+  "logo-bruno-motion.png",
   "offer-logo-bruno.png",
   "no-code-pages-saturn.png",
   "card1.png",

@@ -40,6 +40,24 @@ iframe {
   object-fit: contain;
 }
 
+[data-id="43fd208d"] .elementor-widget-container {
+  position: relative;
+  min-height: 484px;
+  overflow: visible;
+}
+
+[data-id="43fd208d"] img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px !important;
+  max-width: none !important;
+  height: auto !important;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  transform-origin: center;
+  object-fit: contain;
+}
+
 [data-id="30ca4738"] .portfolio-specialty {
   min-height: 36px;
   display: grid;

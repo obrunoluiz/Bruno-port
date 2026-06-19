@@ -123,6 +123,17 @@
     saturnImage.alt = "Bruno Luiz";
   }
 
+  const verticalLogo = document.querySelector('[data-id="43fd208d"] img');
+  if (verticalLogo) {
+    verticalLogo.src = "/logo-bruno-motion.png";
+    verticalLogo.dataset.src = "/logo-bruno-motion.png";
+    verticalLogo.removeAttribute("srcset");
+    verticalLogo.removeAttribute("data-srcset");
+    verticalLogo.removeAttribute("sizes");
+    verticalLogo.removeAttribute("data-sizes");
+    verticalLogo.alt = "Bruno Luiz";
+  }
+
   const aboutImage = document.querySelector('[data-id="5a4069ca"] img');
   if (aboutImage) {
     aboutImage.src = "/bruno-expert.png";
