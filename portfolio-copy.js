@@ -181,6 +181,19 @@
     button.textContent = "FALE COMIGO";
   });
 
+  const whatsappUrl = "https://wa.me/5522999761278?text=Ol%C3%A1%20bruno%20gostaria%20de%20fazer%20um%20or%C3%A7amento%20sobre%20meu%20projeto%21";
+
+  ["9f76fb7", "05d6821"].forEach((id) => {
+    const element = document.querySelector(`[data-id="${id}"]`);
+    const link = element?.matches("a") ? element : element?.querySelector("a");
+
+    if (link) {
+      link.href = whatsappUrl;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+    }
+  });
+
   setWidget("07439a3", '<img class="offer-card-logo" src="/offer-logo-bruno.png" alt="Bruno Luiz">');
   setWidget("849abe5", '<h2 class="elementor-heading-title elementor-size-default">Photoshop e Illustrator</h2>');
   document.querySelector('[data-id="18e95cf"]')?.remove();
