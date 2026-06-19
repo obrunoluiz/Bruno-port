@@ -234,9 +234,6 @@
     moveCarousel(1);
     restartAutoplay();
   });
-  carouselSection.addEventListener("mouseenter", () => clearInterval(autoplay));
-  carouselSection.addEventListener("mouseleave", restartAutoplay);
-
   let touchStart = 0;
   viewport.addEventListener("touchstart", (event) => {
     touchStart = event.touches[0].clientX;
@@ -249,6 +246,9 @@
   }, { passive: true });
 
   window.addEventListener("resize", buildDots);
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) restartAutoplay();
+  });
   buildDots();
   restartAutoplay();
 
