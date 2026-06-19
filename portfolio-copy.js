@@ -117,6 +117,31 @@
     slide.classList.add("portfolio-specialty");
   });
 
+  const portfolioImages = [
+    ["/project-nickson.png", "Projeto Nickson Resende"],
+    ["/project-mariana-links.png", "Projeto Mariana Torres"],
+    ["/project-ia-de-verdade.png", "Comunidade IA de Verdade"],
+    ["/project-wing.png", "Imersão WING"],
+    ["/project-x32.png", "Imersão X32"]
+  ];
+  document.querySelectorAll('[data-id="f8fa23f"] .swiper-slide-image').forEach((image, index) => {
+    const project = portfolioImages[index % portfolioImages.length];
+    image.src = project[0];
+    image.dataset.src = project[0];
+    image.removeAttribute("srcset");
+    image.removeAttribute("data-srcset");
+    image.removeAttribute("sizes");
+    image.removeAttribute("data-sizes");
+    image.alt = project[1];
+  });
+  const portfolioCarousel = document.querySelector('[data-id="f8fa23f"]');
+  if (portfolioCarousel) {
+    portfolioCarousel.id = "projetos";
+    if (window.location.hash === "#projetos") {
+      requestAnimationFrame(() => portfolioCarousel.scrollIntoView({ block: "center" }));
+    }
+  }
+
   const about = document.querySelector('[data-id="13a5f852"] .elementor-widget-container');
   if (about) {
     about.innerHTML = "<p>Acredito que design não é apenas aparência.</p><p>Meu trabalho consiste em entender objetivos, identificar oportunidades e criar soluções digitais que contribuam para o crescimento de negócios e marcas.</p><p>Cada projeto é desenvolvido considerando posicionamento, experiência do usuário, comunicação e resultados.</p>";

@@ -13,7 +13,16 @@ const deployHtml = sourceHtml
 
 fs.writeFileSync(path.join(output, "index.html"), deployHtml, "utf8");
 
-for (const asset of ["portfolio-copy.css", "portfolio-copy.js", "hero-bruno.png"]) {
+for (const asset of [
+  "portfolio-copy.css",
+  "portfolio-copy.js",
+  "hero-bruno.png",
+  "project-nickson.png",
+  "project-mariana-links.png",
+  "project-ia-de-verdade.png",
+  "project-wing.png",
+  "project-x32.png"
+]) {
   fs.copyFileSync(path.join(root, asset), path.join(output, asset));
 }
 

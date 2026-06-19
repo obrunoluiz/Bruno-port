@@ -33,6 +33,19 @@
   content: attr(data-specialty);
 }
 
+[data-id="f8fa23f"] .swiper-slide-inner {
+  display: block;
+  aspect-ratio: 1000 / 1430;
+  overflow: hidden;
+}
+
+[data-id="f8fa23f"] .swiper-slide-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: top center !important;
+}
+
 @media (max-width: 767px) {
   [data-id="29eb57c4"] {
     background-color: #050403 !important;
