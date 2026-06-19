@@ -47,6 +47,21 @@ iframe {
   object-fit: contain;
 }
 
+[data-id="34994949"] img,
+[data-id="4c87b8c3"] img,
+[data-id="594a4a3b"] img {
+  width: 34px !important;
+  height: 34px !important;
+  object-fit: contain;
+}
+
+[data-id="62b8d710"] img,
+[data-id="771290f0"] img {
+  width: 49px !important;
+  height: 36px !important;
+  object-fit: contain;
+}
+
 [data-id="43fd208d"] .elementor-widget-container {
   position: relative;
   min-height: 484px;
