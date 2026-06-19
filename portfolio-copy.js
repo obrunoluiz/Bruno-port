@@ -178,17 +178,12 @@
   }
 
   document.querySelectorAll(".elementor-button-text").forEach((button) => {
-    const label = clean(button.textContent).toLowerCase();
-    if (label.includes("quero me inscrever") || label.includes("garantir minha vaga")) {
-      button.textContent = label.includes("garantir") ? "SOLICITAR ORÇAMENTO" : "VER PROJETOS";
-    }
+    button.textContent = "FALE COMIGO";
   });
 
   setWidget("07439a3", '<img class="offer-card-logo" src="/offer-logo-bruno.png" alt="Bruno Luiz">');
   setWidget("849abe5", '<h2 class="elementor-heading-title elementor-size-default">Photoshop e Illustrator</h2>');
   document.querySelector('[data-id="18e95cf"]')?.remove();
-  const offerButton = document.querySelector('[data-id="9f76fb7"] .elementor-button-text');
-  if (offerButton) offerButton.textContent = "Fazer Orçamento";
 
   const specialties = [
     "Landing Pages",
