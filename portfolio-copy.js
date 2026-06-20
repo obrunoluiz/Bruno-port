@@ -538,5 +538,6 @@
     title.closest(".e-n-accordion-item, .elementor-accordion-item")?.remove();
   });
 
+  document.querySelector('[data-id="ab1e8fd"]')?.remove();
   document.title = "Bruno Luiz | Designer Estratégico e Web Designer";
 })();

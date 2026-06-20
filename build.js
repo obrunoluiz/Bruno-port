@@ -7,7 +7,14 @@ const output = path.join(root, "dist");
 fs.mkdirSync(output, { recursive: true });
 
 const sourceHtml = fs.readFileSync(path.join(root, "index.html"), "utf8");
-const deployHtml = sourceHtml
+const cleanedHtml = sourceHtml
+  .replace(/<title>[\s\S]*?<\/title>/i, "<title>Bruno Luiz | Designer Estratégico e Web Designer</title>")
+  .replace(/<link rel=["']icon["'][^>]*>/gi, "")
+  .replace(/<link rel=["']apple-touch-icon["'][^>]*>/gi, "")
+  .replace(/<meta name=["']msapplication-TileImage["'][^>]*>/gi, "")
+  .replace(/<div class="elementor-element elementor-element-ab1e8fd[\s\S]*?<\/script>\s*<\/div><\/div>/i, "");
+
+const deployHtml = cleanedHtml
   .replace(
     '<link rel="canonical" href="https://designagora.onlineaprender.com/webdesign/" />',
     '<link rel="canonical" href="https://bruno-port.vercel.app/" />'
@@ -16,7 +23,10 @@ const deployHtml = sourceHtml
     '<meta property="og:url" content="https://designagora.onlineaprender.com/webdesign/" />',
     '<meta property="og:url" content="https://bruno-port.vercel.app/" />'
   )
-  .replace("</head>", '<link rel="stylesheet" href="/portfolio-copy.css"></head>')
+  .replace(
+    "</head>",
+    '<link rel="icon" type="image/png" href="/favicon-bruno.png"><link rel="apple-touch-icon" href="/favicon-bruno.png"><link rel="stylesheet" href="/portfolio-copy.css"></head>'
+  )
   .replace("</body>", '<script src="/portfolio-copy.js"></script></body>');
 
 fs.writeFileSync(path.join(output, "index.html"), deployHtml, "utf8");
@@ -29,6 +39,7 @@ for (const asset of [
   "logo-de-cria.png",
   "logo-bruno-motion.png",
   "offer-logo-bruno.png",
+  "favicon-bruno.png",
   "no-code-pages-saturn.png",
   "pen-tool.png",
   "card1.png",
