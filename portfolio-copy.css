@@ -152,6 +152,14 @@ iframe {
 .portfolio-carousel-viewport {
   overflow: hidden;
   touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+}
+
+.portfolio-carousel-viewport.is-dragging {
+  cursor: grabbing;
 }
 
 .portfolio-carousel-track {
@@ -270,6 +278,27 @@ iframe {
   .elementor-button {
     white-space: normal;
     text-align: center;
+  }
+
+  [data-id="30ca4738"] .swiper,
+  [data-id="f8fa23f"] .swiper,
+  .portfolio-carousel-viewport {
+    touch-action: pan-y !important;
+    overscroll-behavior-x: contain;
+  }
+
+  [data-id="30ca4738"] .swiper-slide,
+  [data-id="f8fa23f"] .swiper-slide,
+  .portfolio-carousel-slide {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  [data-id="30ca4738"] img,
+  [data-id="f8fa23f"] img,
+  .portfolio-carousel-slide img {
+    pointer-events: none;
+    -webkit-user-drag: none;
   }
 
   /* Reveal effects from the original page must never leave blank sections. */

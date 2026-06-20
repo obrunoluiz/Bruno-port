@@ -276,6 +276,59 @@
     }
   }
 
+  const tuneMobileSwipers = () => {
+    if (!window.matchMedia("(max-width: 767px)").matches) return;
+
+    ["30ca4738", "f8fa23f"].forEach((id) => {
+      const swiperElement = document.querySelector(`[data-id="${id}"] .swiper`);
+      const swiper = swiperElement?.swiper;
+      if (!swiper || swiperElement.mobileSwipeInstance === swiper) return;
+
+      swiperElement.mobileSwipeInstance = swiper;
+      swiperElement.style.touchAction = "pan-y";
+      swiper.allowTouchMove = true;
+      swiper.params.allowTouchMove = true;
+      swiper.params.followFinger = true;
+      swiper.params.shortSwipes = true;
+      swiper.params.longSwipes = true;
+      swiper.params.longSwipesRatio = 0.2;
+      swiper.params.threshold = 6;
+      swiper.params.touchAngle = 35;
+      swiper.params.resistance = true;
+      swiper.params.resistanceRatio = 0.65;
+      swiper.params.preventInteractionOnTransition = false;
+
+      const automaticSpeed = swiper.params.speed;
+      let resumeTimer;
+
+      swiper.on("touchStart", () => {
+        clearTimeout(resumeTimer);
+        swiper.autoplay?.stop();
+        swiper.params.speed = 380;
+      });
+
+      swiper.on("touchEnd", () => {
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(() => {
+          swiper.params.speed = automaticSpeed;
+          swiper.autoplay?.start();
+        }, 1400);
+      });
+    });
+  };
+
+  let swiperSetupAttempts = 0;
+  const waitForMobileSwipers = () => {
+    tuneMobileSwipers();
+    swiperSetupAttempts += 1;
+    if (swiperSetupAttempts < 20) setTimeout(waitForMobileSwipers, 250);
+  };
+  waitForMobileSwipers();
+  document.addEventListener("DOMContentLiteSpeedLoaded", tuneMobileSwipers);
+  document.addEventListener("pointerdown", tuneMobileSwipers, { capture: true, passive: true });
+  window.addEventListener("load", tuneMobileSwipers);
+  window.addEventListener("orientationchange", () => setTimeout(tuneMobileSwipers, 250));
+
   const carouselAssets = [
     ...Array.from({ length: 9 }, (_, index) => `/carousel-${String(index + 1).padStart(2, "0")}.gif`),
     ...Array.from({ length: 9 }, (_, index) => `/carousel-${String(index + 10).padStart(2, "0")}.png`)
@@ -315,6 +368,10 @@
   let offset = 0;
   let animationFrame;
   let previousFrame;
+  let isDragging = false;
+  let dragStartX = 0;
+  let dragStartOffset = 0;
+  let resumeAt = 0;
 
   const visibleSlides = () => window.matchMedia("(max-width: 767px)").matches ? 1 : 4;
   const slideWidth = () => viewport.clientWidth / visibleSlides();
@@ -396,9 +453,11 @@
     if (previousFrame === undefined) previousFrame = timestamp;
     const elapsed = Math.min(timestamp - previousFrame, 50);
     previousFrame = timestamp;
-    const pixelsPerSecond = window.matchMedia("(max-width: 767px)").matches ? 26 : 38;
-    offset += pixelsPerSecond * elapsed / 1000;
-    positionTrack();
+    if (!isDragging && timestamp >= resumeAt) {
+      const pixelsPerSecond = window.matchMedia("(max-width: 767px)").matches ? 26 : 38;
+      offset += pixelsPerSecond * elapsed / 1000;
+      positionTrack();
+    }
     animationFrame = requestAnimationFrame(runContinuousScroll);
   };
 
@@ -408,14 +467,40 @@
   carouselSection.querySelector(".portfolio-carousel-next").addEventListener("click", () => {
     moveCarousel(1);
   });
-  let touchStart = 0;
-  viewport.addEventListener("touchstart", (event) => {
-    touchStart = event.touches[0].clientX;
-  }, { passive: true });
-  viewport.addEventListener("touchend", (event) => {
-    const delta = touchStart - event.changedTouches[0].clientX;
-    if (Math.abs(delta) > 40) moveCarousel(delta > 0 ? 1 : -1);
-  }, { passive: true });
+  const finishDrag = (event) => {
+    if (!isDragging) return;
+
+    isDragging = false;
+    viewport.classList.remove("is-dragging");
+    if (viewport.hasPointerCapture?.(event.pointerId)) {
+      viewport.releasePointerCapture(event.pointerId);
+    }
+
+    const width = slideWidth();
+    offset = Math.round(offset / width) * width;
+    resumeAt = performance.now() + 1400;
+    positionTrack();
+  };
+
+  viewport.addEventListener("pointerdown", (event) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+
+    isDragging = true;
+    dragStartX = event.clientX;
+    dragStartOffset = offset;
+    viewport.classList.add("is-dragging");
+    viewport.setPointerCapture?.(event.pointerId);
+  });
+
+  viewport.addEventListener("pointermove", (event) => {
+    if (!isDragging) return;
+
+    offset = dragStartOffset + (dragStartX - event.clientX);
+    positionTrack();
+  });
+
+  viewport.addEventListener("pointerup", finishDrag);
+  viewport.addEventListener("pointercancel", finishDrag);
 
   let resizeTimer;
   window.addEventListener("resize", () => {
