@@ -294,7 +294,7 @@ iframe {
   }
 
   [data-id="29eb57c4"] {
-    min-height: 620px !important;
+    min-height: 570px !important;
     background-color: #050403 !important;
     background-position: 68% top !important;
     background-size: auto 545px !important;
@@ -303,7 +303,7 @@ iframe {
 
   [data-id="29eb57c4"] > .e-con-inner {
     position: relative !important;
-    min-height: 620px !important;
+    min-height: 570px !important;
     width: 100% !important;
     padding: 0 !important;
   }
@@ -464,13 +464,13 @@ iframe {
 
 @media (max-width: 380px) {
   [data-id="29eb57c4"] {
-    min-height: 590px !important;
+    min-height: 540px !important;
     background-position: 66% top !important;
     background-size: auto 500px !important;
   }
 
   [data-id="29eb57c4"] > .e-con-inner {
-    min-height: 590px !important;
+    min-height: 540px !important;
   }
 
   [data-id="33914431"] {
