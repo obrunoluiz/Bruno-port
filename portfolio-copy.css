@@ -311,7 +311,7 @@ iframe {
   [data-id="33914431"] {
     position: absolute !important;
     z-index: 3;
-    top: 410px !important;
+    top: 50% !important;
     right: 0 !important;
     left: 0 !important;
     width: 100vw !important;
@@ -320,7 +320,7 @@ iframe {
     padding: 0 16px 28px !important;
     align-items: center !important;
     box-sizing: border-box !important;
-    transform: none !important;
+    transform: translateY(-50%) !important;
   }
 
   [data-id="46a54668"] {
@@ -459,9 +459,6 @@ iframe {
     background-size: auto 525px !important;
   }
 
-  [data-id="33914431"] {
-    top: 395px !important;
-  }
 }
 
 @media (max-width: 380px) {
@@ -476,7 +473,6 @@ iframe {
   }
 
   [data-id="33914431"] {
-    top: 375px !important;
     padding-inline: 12px !important;
   }
 
