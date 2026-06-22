@@ -91,8 +91,6 @@
   setWidget("1ba0e33e", '<h2 class="elementor-heading-title elementor-size-default">PROJETOS EM <span class="gradienteidvv2">DESTAQUE</span></h2>');
   setWidget("ed1d824", '<h2 class="elementor-heading-title elementor-size-default">UMA SELEÇÃO DE SITES COM DIFERENTES OBJETIVOS E SEGMENTOS</h2>');
   setWidget("b61b0ab", '<h2 class="elementor-heading-title elementor-size-default">DESIGN COM <span class="gradienteidvv2">VISÃO DE NEGÓCIO</span></h2>');
-  setWidget("0bd0236", '<h2 class="elementor-heading-title elementor-size-default">Design, Marketing e IA trabalhando juntos.</h2>');
-  setWidget("e0c8177", '<p>Minha abordagem une criatividade, estratégia e tecnologia para desenvolver experiências digitais que fortalecem marcas e impulsionam resultados.</p>');
 
   const heroLogo = document.querySelector('[data-id="d53e663"] img');
   if (heroLogo) {
@@ -234,7 +232,7 @@
   });
 
   const sampleCards = [
-    ["36e356e7", "/card1.png", "Landing Pages"],
+    ["36e356e7", "/card1.png?v=2", "Design, Marketing e IA"],
     ["1edba248", "/card2.png", "Identidade Visual"],
     ["3686c29a", "/card3.png", "Campanhas"],
     ["2fe12819", "/card4.png", "Design para Marketing"],
