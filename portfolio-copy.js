@@ -91,6 +91,8 @@
   setWidget("1ba0e33e", '<h2 class="elementor-heading-title elementor-size-default">PROJETOS EM <span class="gradienteidvv2">DESTAQUE</span></h2>');
   setWidget("ed1d824", '<h2 class="elementor-heading-title elementor-size-default">UMA SELEÇÃO DE SITES COM DIFERENTES OBJETIVOS E SEGMENTOS</h2>');
   setWidget("b61b0ab", '<h2 class="elementor-heading-title elementor-size-default">DESIGN COM <span class="gradienteidvv2">VISÃO DE NEGÓCIO</span></h2>');
+  setWidget("11ff608d", '<h2 class="elementor-heading-title elementor-size-default">Design, Marketing e IA trabalhando juntos.</h2>');
+  setWidget("228576fe", '<p>Minha abordagem une criatividade, estratégia e tecnologia para desenvolver experiências digitais que fortalecem marcas e impulsionam resultados.</p>');
 
   const heroLogo = document.querySelector('[data-id="d53e663"] img');
   if (heroLogo) {
