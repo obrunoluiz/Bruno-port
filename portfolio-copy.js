@@ -232,7 +232,7 @@
   });
 
   const sampleCards = [
-    ["36e356e7", "/card1.png?v=2", "Design, Marketing e IA"],
+    ["36e356e7", "/card1.png", "Landing Pages"],
     ["1edba248", "/card2.png", "Identidade Visual"],
     ["3686c29a", "/card3.png", "Campanhas"],
     ["2fe12819", "/card4.png", "Design para Marketing"],
